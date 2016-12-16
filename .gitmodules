@@ -1,0 +1,3 @@
+[submodule "resync-proto-server"]
+	path = resync-proto-server
+	url = https://github.com/oacore/resync-proto-server.git
