@@ -1,0 +1,54 @@
+= ResourceSync server
+
+=== Overview
+ResourceSync is a synchronization framework for the web consisting of various
+capabilities that allow third-party systems to remain synchronized with a
+server's evolving resources. It is based on the Sitemaps protocol, extending
+its capabilities in order to keep track of resources' state.
+
+The purpose of our work is to develop a fully compliant, reliable and scalable
+implementation of a ResourceSync server that can allow the Data Interoperability
+Toolkit to expose metadata and full-text resources downloaded from publishers
+overtime.
+
+=== Requirements
+. Maximizing response time to resync requests
+. Managing separate sets of resources belonging to different data providers
+. Optimization for continuous additions and occasional deletes/updates
+. Dealing with sitemaps limitations (max 50k items/document, max 50MB)
+. Metadata and content files related to a publication should be linked
+
+=== Architecture
+image::resync-arch.png[caption="Figure 1. ", title="Architecture"]
+
+
+=== ElasticSearch
+* Resource state will be kept into ElasticSearch indexes. For each resource,
+we will store metadata that will be showed in sitemaps docs (last mod, hash,
+  size, etc)
+* Whenever a new ResourceList has to be generated, its pagination will come
+directly from the ElasticSearch index, and each xml document will be cached and
+regenerated after a given amount of detected changes
+* When a change in the folder is detected, the event will be registered into
+ElasticSearch, in a way that a ChangeList related to a given period of time
+will be generated taking into account the events occurred in that time interval.
+ ChangeList caching will be implemented as well.
+* Periodically, a new ResourceList will be generated and the current ChangeList
+will be “closed”, therefore a new ChangeList will be initialized. There is no
+indication for the appropriate time interval in the ResourceSync specification,
+so we will tune this parameter based on the metadata/pdfs download rate.
+
+=== Further improvements
+* Push protocol based on PubSubHubbub
+** Change Notification
+*** Notifies about changes to particular resources e.g.,
+resource A has been updated | created | deleted
+** Framework Notification
+*** Notifies about changes to capabilities e.g.,
+a Change List has been updated | created | deleted
+* Resources and Changes dumps
+
+=== References
+OAI Reference Page: http://www.openarchives.org/rs/toc +
+Framework specification: http://www.openarchives.org/rs/1.0/resourcesync +
+Tutorial slides: http://www.openarchives.org/rs/1.0/resourcesync
