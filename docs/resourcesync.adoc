@@ -22,7 +22,7 @@ overtime.
 image::resync-arch.png[caption="Figure 1. ", title="Architecture"]
 
 
-=== ElasticSearch
+=== Approach to develop a scalable ResourceSync implementation
 * Resource state will be kept into ElasticSearch indexes. For each resource,
 we will store metadata that will be showed in sitemaps docs (last mod, hash,
   size, etc)
