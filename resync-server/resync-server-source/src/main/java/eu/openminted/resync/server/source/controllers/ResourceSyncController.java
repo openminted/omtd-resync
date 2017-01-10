@@ -1,6 +1,6 @@
 package eu.openminted.resync.server.source.controllers;
 
-import eu.openminted.resync.server.source.ResourceSyncConstants;
+import eu.openminted.resync.server.source.utils.ResourceSyncConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.RequestMapping;

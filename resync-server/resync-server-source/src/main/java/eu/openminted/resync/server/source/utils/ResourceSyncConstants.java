@@ -1,4 +1,4 @@
-package eu.openminted.resync.server.source;
+package eu.openminted.resync.server.source.utils;
 
 /**
  * ResourceSync constants

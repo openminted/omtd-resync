@@ -3,6 +3,7 @@ package eu.openminted.resync.server.source;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * Server entry-point
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 
 @SpringBootApplication
+@EnableAsync
 @ComponentScan(basePackages = {"eu.openminted.resync.server.source"})
 public class App {
 
